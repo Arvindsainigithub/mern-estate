@@ -29,9 +29,9 @@ export default function Header() {
               About
             </li>
           </Link>
-          <Link to={"/sign-in"}>
+          <Link to={"/sign-up"}>
             {" "}
-            <li className="hover:underline cursor-pointer">Singin</li>
+            <li className="hover:underline cursor-pointer">Sing-Up</li>
           </Link>
         </ul>
       </div>
