@@ -70,3 +70,25 @@ export const Login = async (req, res,next) => {
         return next(errorHandler(500,"Internal Server Error"))
     }
 }
+
+export const google = async(req,res,next)=>{
+    try {
+        const user = await User.findOne({email:req.body.email})
+        if(user){
+            const token = jwt.sign({id:user._id},process.env.JWT_SECRET)
+            const {password:pass, ...rest}=user._doc;
+            res.cookie("access_token",token,{httpOnly:true}).status(200).json(rest)
+        }else{
+        const generatePassword = Math.random().toString(36).slice(-8)
+        const hashPassword = bcrypt.hashSync(generatePassword,10)
+        const newUser = await User({email:req.body.email,name:req.body.name,password:hashPassword,avatar:req.body.photo})
+        await newUser.save();
+        const token = jwt.sign({id:newUser._id},process.env.JWT_SECRET)
+        const {password:pass, ...rest}= newUser._doc;
+        res.cookie("access_token",token,{httpOnly:true}).status(200).json(rest)
+        }
+        
+    } catch (error) {
+        next(error)
+    }
+}

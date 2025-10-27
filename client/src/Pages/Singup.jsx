@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Oauth from "./Oauth";
 
 export default function Singup() {
   const navigate = useNavigate();
@@ -66,6 +67,7 @@ export default function Singup() {
         <button className="bg-slate-700 p-3 rounded-lg hover:opacity-95 disabled:opacity-80 uppercase text-white cursor-pointer">
           {loading ? "Loading" : "Sign-Up"}
         </button>
+      <Oauth/>
       </form>
       <div className="flex my-4">
         <p>Have an Account?</p>

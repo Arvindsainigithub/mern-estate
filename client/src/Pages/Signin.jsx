@@ -6,6 +6,7 @@ import {
   signInFailur,
   signInSuccess,
 } from "../redux/user/userSlice.js";
+import Oauth from "./Oauth.jsx";
 
 export default function Singup() {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ export default function Singup() {
         dispatch(signInFailur(res.message));
         return;
       }
-      dispatch(signInSuccess(res.rest));
+      dispatch(signInSuccess(res));
       console.log("Here is success message:",res)
       navigate("/");
     } catch (error) {
@@ -63,6 +64,7 @@ export default function Singup() {
         <button className="bg-slate-700 p-3 rounded-lg hover:opacity-95 disabled:opacity-80 uppercase text-white cursor-pointer">
           {loading ? "Loading" : "Sign-In"}
         </button>
+      <Oauth/>
       </form>
       <div className="flex my-4">
         <p>Dont have an Account</p>
